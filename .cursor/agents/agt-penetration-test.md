@@ -2,7 +2,7 @@
 name: agt-penetration-test
 model: inherit
 description: >-
-  AWS 上のマルチテナント Web アプリを攻撃者目線でレビューする。モードは英語の
+  マルチテナント Web アプリを攻撃者目線でレビューする。モードは英語の
   full（アプリ本体の静的棚卸し）か diff（統合ブランチとの差分だけ）。
   指定が無ければ diff。Cognito JWT、API Gateway とアプリガードの二層、
   テナント越境、IDOR、認可バイパス、Prisma の生 SQL、S3 署名付き URL を検証する。

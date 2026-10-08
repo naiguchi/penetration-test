@@ -1,12 +1,12 @@
-# aws-penetration-test
+# penetration-test
 
-AWS 上のマルチテナント Web アプリケーションを、攻撃者の視点で静的に調べる Cursor 用の手順です。アプリケーション本体は含みません。手順・エージェント・スキルだけを置いています。
+マルチテナント Web アプリケーションを、攻撃者の視点で静的に調べる Cursor 用の手順です。アプリケーション本体は含みません。手順・エージェント・スキルだけを置いています。
 
 想定する開発環境は次のとおりです。対象リポジトリの実装が違う場合は、リポジトリ側の名前と構成に合わせ、この想定を上書きします。
 
 | 層 | 想定 |
 | --- | --- |
-| API | NestJS。実行は AWS Lambda |
+| API | NestJS。実行は Lambda |
 | 入口 | Amazon API Gateway。JWT オーソライザーが外層 |
 | 認証 | Amazon Cognito のユーザープール。検証はアプリのガードが内層 |
 | データ | Prisma と Aurora PostgreSQL |

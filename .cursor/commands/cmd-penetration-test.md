@@ -1,6 +1,6 @@
 # /cmd-penetration-test
 
-AWS 上のマルチテナント Web アプリケーションを攻撃者目線でレビューする。手順の正本は Skill、実行は `agt-penetration-test`。
+マルチテナント Web アプリケーションを攻撃者目線でレビューする。手順の正本は Skill、実行は `agt-penetration-test`。
 
 ## 必読
 

@@ -1,7 +1,7 @@
 ---
 name: penetration-test
 description: >-
-  AWS マルチテナント Web アプリの攻撃者視点レビュー手順。モード指定は英語の
+  マルチテナント Web アプリの攻撃者視点レビュー手順。モード指定は英語の
   full（アプリ本体の静的棚卸し）か diff（統合ブランチとの差分だけ）。
   指定が無ければ diff。Cognito JWT、API Gateway と
   アプリガード、テナント越境、IDOR、認可バイパス、Prisma 生 SQL、S3 署名付き URL を
@@ -9,7 +9,7 @@ description: >-
   /cmd-penetration-test、ペネトレーション、攻撃者視点、セキュリティ監査で使う。
 ---
 
-# ペネトレーションテスト（AWS マルチテナント）
+# ペネトレーションテスト（マルチテナント）
 
 ## 契約
 
@@ -17,7 +17,7 @@ description: >-
 - 入力（範囲・環境・diff）に対し、成立するベクターを証拠付きで列挙する。
 - 修正実装はユーザーが明示したときだけ。ベース URL の無い環境へはリクエストしない。
 
-想定する開発環境は、NestJS on AWS Lambda、Amazon API Gateway、Amazon Cognito、Prisma + Aurora PostgreSQL、React、Amazon S3 である。テナント所有の行はテナントキーを持つ。ロール権限と行の所有テナントは別判定である。対象リポジトリの構成が違えば、リポジトリ側を優先する。
+想定する開発環境は、NestJS on Lambda、API Gateway、Cognito、Prisma + Aurora PostgreSQL、React、S3 である。テナント所有の行はテナントキーを持つ。ロール権限と行の所有テナントは別判定である。対象リポジトリの構成が違えば、リポジトリ側を優先する。
 
 ## 倫理・スコープ
 
