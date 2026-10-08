@@ -8,16 +8,16 @@ AWS 上のマルチテナント Web アプリケーションを攻撃者目線�
 
 ## モード
 
-起動時にどちらかへ固定する。報告の §0 にモード名を書く。片方の結果を、もう片方へ広げない。
+指定は英語の `full` か `diff` だけにする。起動時にどちらかへ固定する。報告の §0 にはその英単語を書く。片方の結果を、もう片方へ広げない。
 
-| モード | 用途 | 言い方の例 |
+| モード | 用途 | 起動 |
 | --- | --- | --- |
-| 全体チェック | アプリ本体の攻撃面を静的に見る。リリース前や定期の棚卸し | `/cmd-penetration-test 全体`、「全体チェック」 |
-| 個別確認 | 差分、未コミット、指定パスだけを見る。PR 前やその機能の確認 | `/cmd-penetration-test 個別`、パスや「この変更」 |
+| `full` | アプリ本体の攻撃面を静的に見る。リリース前や定期の棚卸し | `/cmd-penetration-test full` |
+| `diff` | 統合ブランチとの差分だけを見る。PR 前の確認 | `/cmd-penetration-test diff` |
 
-どちらも無いときは個別確認にする。差分は、`origin/develop` があれば `git diff origin/develop...HEAD`、無ければ `git diff origin/main...HEAD`。その差分にアプリの攻撃面が無くても、全体チェックへ切り替えない。全体が必要ならユーザーに確認する。
+`full` も `diff` も無いときは `diff` にする。差分は、`origin/develop` があれば `git diff origin/develop...HEAD`、無ければ `git diff origin/main...HEAD`。未コミットや別パスは範囲に入れない。差分にアプリの攻撃面が無くても、`full` へ切り替えない。`full` が必要ならユーザーに確認する。
 
-同じ依頼で両方を指定されたときは、個別確認を完了してから全体チェックを始める。報告は分け、発見を移さない。
+同じ依頼に `full` と `diff` の両方があるときは、`diff` を完了してから `full` を始める。報告は分け、発見を移さない。
 
 この手順は URL スキャンの代わりにしない。
 
@@ -30,13 +30,10 @@ AWS 上のマルチテナント Web アプリケーションを攻撃者目線�
 
 ## 手順
 
-1. モードを固定する。全体チェックか個別確認か。個別確認なら、続けて次のどれかを範囲にする。
-   - `branch changes`（上記の `git diff`）
-   - `uncommitted changes`
-   - 特定パス（feature / Controller / エンドポイント）
+1. モードを `full` か `diff` に固定する。どちらも無ければ `diff`。`diff` の範囲は上記の `git diff` だけにする。
 2. Task でサブエージェント `agt-penetration-test` を起動する。親が Skill を読んで自分でレビューを完了させない。プロンプトに含める。
    - `Full Repository Path`: 調査するアプリケーションの絶対パス
-   - `Diff`: `全体チェック`、または個別確認の範囲種別とパス
+   - `Diff`: `full` または `diff`
    - `Change Description`: 変更ファイルと要点（diff が取れない場合）
    - `Custom Instructions`: ユーザーが指定した攻撃者、環境、重点カテゴリ。ベース URL の指定が無ければリクエストしない。渡されたモードを変えない
 3. サブエージェントは `.cursor/agents/agt-penetration-test.md` と Skill に従い、偵察、脅威モデリング、検証、報告を行う。
